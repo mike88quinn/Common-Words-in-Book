@@ -75,7 +75,7 @@ def get_txt_file():
             print("That was not a valid number.  Try again...")
         except IndexError:
             # if user entered number out of range of list throw error message
-            print('That value was out of range.  please select between 1 and ' + str(count - 1))
+            print('That value was out of range.  please select between 1 and ' + str(count))
 
     # open the book the user selected
     book = open(filename, encoding="utf8")
@@ -140,7 +140,7 @@ def print_table(title, dict):
     print(star)
 
     # print the heading of the columns
-    print('*' + "Word".center(25) + '*' + "Times Appeared".center(25) + '*' +
+    print('*' + "Most Common Words".center(25) + '*' + "Times Appeared".center(25) + '*' +
           "Percentage of Book".center(26) + '*')
     print(star)
 
@@ -184,13 +184,13 @@ while True:
     # create a dictionary with the top five used words from file
     top_uncommon_words_lower = dict(Counter(words_count_uncommon).most_common(5))
 
-    title = "Top five words used in the text regardless of capitalization."
+    title = "Top 5 words used in the text regardless of capitalization."
     print_table(title, top_words)
 
-    title = "Top five words in the text forcing all text to lowercase."
+    title = "Top 5 words in the text forcing all text to lowercase."
     print_table(title, top_words_lower)
 
-    title = "Top five words in the text forced to lowercase and excluding most common words."
+    title = "Top 5 words in the text forced to lowercase and excluding most common words."
     print_table(title, top_uncommon_words_lower)
 
     # ask the user if they would like to do another book

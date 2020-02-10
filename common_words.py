@@ -155,7 +155,6 @@ def print_table(title, dict):
 
 ''' Main program '''
 while True:
-    title = ''
     # print the instructions to the user
     print_instructions()
 
@@ -184,6 +183,7 @@ while True:
     # create a dictionary with the top five used words from file
     top_uncommon_words_lower = dict(Counter(words_count_uncommon).most_common(5))
 
+    # print the tables
     title = "Top 5 words used in the text regardless of capitalization."
     print_table(title, top_words)
 
@@ -196,10 +196,10 @@ while True:
     # ask the user if they would like to do another book
     while True:
         print('Would you like to do another book? Y/N')
-        anotherMadLibs = str(input())
-        if anotherMadLibs.upper() == 'N':
+        do_again = str(input())
+        if do_again.upper() == 'N':
             exit()
-        elif anotherMadLibs.upper() != 'Y':
+        elif do_again.upper() != 'Y':
             print('Please enter either Y or N')
         else:
             break

@@ -12,13 +12,12 @@ Please provide links to the repositories containing your source code, as well as
 
 import os
 from collections import Counter
+import pprint
 
 '''
 This method prints the instructions to the user and displays the txt files located in the working folder
 or sub-folder
 '''
-
-
 def print_instructions():
     '''
     Prompt user on the purpose of this file
@@ -38,8 +37,6 @@ def print_instructions():
 This method prints all the txt files found in the working folder or sub-folder and allows the user to select which txt
 file they would like to use.
 '''
-
-
 def get_txt_file():
     # create a variable that will count the files ending in .txt in the current working directory or sub directories
     count = 0
@@ -96,8 +93,6 @@ def get_txt_file():
 '''
 this method creates a dictionary will all of the words in the book and the number of times they are used.
 '''
-
-
 def book_dictionary(book):
     # create a dictionary where the key is the word in the file and the value is the times it appears
     result = {}
@@ -113,8 +108,6 @@ def book_dictionary(book):
 '''
 this method creates a dictionary with all the words in the book except for the 100 most common words.
 '''
-
-
 def book_dictionary_uncommon(book):
     common_words = {"the", "be", "to", "of", "and", "a", "in", "that", "have", "I", "it", "for", "not", "on", "with",
                     "he", "as", "you", "do", "at", "this", "but", "his", "by", "from", "they", "we", "say", "her",
@@ -136,8 +129,33 @@ def book_dictionary_uncommon(book):
 
     return result
 
+''' Print the table to the user '''
+def print_table(title, dict):
+    # create a line of stars to delimite the rows of the table
+    star = '*'.center(80, '*')
+    print(star)
 
+    # print the title of the table
+    print('*' + title.center(78) + '*')
+    print(star)
+
+    # print the heading of the columns
+    print('*' + "Word".center(25) + '*' + "Times Appeared".center(25) + '*' +
+          "Percentage of Book".center(26) + '*')
+    print(star)
+
+    # iterate through the dictionary and print the word, amount, and percentage it appeared in the text.
+    for key, value in dict.items():
+        print('*' + key.center(25) + '*' + str(value).center(25) + '*' +
+              (str('{0:.2f}'.format(value / total_words)) + '%').center(26) + '*')
+        print(star)
+
+    # print an extra line to leave space between tables.
+    print("\n")
+
+''' Main program '''
 while True:
+    title = ''
     # print the instructions to the user
     print_instructions()
 
@@ -166,24 +184,14 @@ while True:
     # create a dictionary with the top five used words from file
     top_uncommon_words_lower = dict(Counter(words_count_uncommon).most_common(5))
 
-    # Display the top five words used and the percent of the text they make up.
-    for key, value in top_words.items():
-        print("The word '" + key + "' appeared " + str(value) + " times. Which is " +
-              str('{0:.2f}'.format(value / total_words)) + "% of the text.")
+    title = "Top five words used in the text regardless of capitalization."
+    print_table(title, top_words)
 
-    print("\nTotal if all words were forced to lowercase.")
+    title = "Top five words in the text forcing all text to lowercase."
+    print_table(title, top_words_lower)
 
-    # Display the top five words forced to lower case and the percent of the text they make up.
-    for key, value in top_words_lower.items():
-        print("The word '" + key + "' appeared " + str(value) + " times. Which is " +
-              str('{0:.2f}'.format(value / total_words)) + "% of the text.")
-
-    print("\nTotal if all words were forced to lowercase and remove 100 most common words in the English Language.")
-
-    # Display the top five words forced to lower case and the percent of the text they make up.
-    for key, value in top_uncommon_words_lower.items():
-        print("The word '" + key + "' appeared " + str(value) + " times. Which is " +
-              str('{0:.2f}'.format(value / total_words)) + "% of the text.")
+    title = "Top five words in the text forced to lowercase and excluding most common words."
+    print_table(title, top_uncommon_words_lower)
 
     # ask the user if they would like to do another book
     while True:

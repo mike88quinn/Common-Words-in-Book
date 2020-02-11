@@ -16,7 +16,6 @@ import pprint
 
 '''
 This method prints the instructions to the user and displays the txt files located in the working folder
-or sub-folder
 '''
 def print_instructions():
     '''
@@ -34,14 +33,15 @@ def print_instructions():
 
 
 '''
-This method prints all the txt files found in the working folder or sub-folder and allows the user to select which txt
+This method prints all the txt files found in the working folder and allows the user to select which txt
 file they would like to use.
 '''
 def get_txt_file():
-    # create a variable that will count the files ending in .txt in the current working directory or sub directories
+    # create a variable that will count the files ending in .txt in the current working directory
     count = 0
-    # create a list to hold the files ending in .txt in the current working directory or sub directories
+    # create a list to hold the files ending in .txt in the current working directory
     text_files = []
+    file_dict = {}
     # iterate through the files in the folder looking for files ending in .txt
     for folderName, subfolders, filenames in os.walk(os.getcwd()):
         for file in filenames:
@@ -56,7 +56,7 @@ def get_txt_file():
 
     # if the count is zero no txt files were found. exit program so user can add files.
     if count == 0:
-        print("No files were found in the working folder or sub folders. The program will now exit.")
+        print("No files were found in the working folder. The program will now exit.")
         exit()
 
     # get user's .txt choice
